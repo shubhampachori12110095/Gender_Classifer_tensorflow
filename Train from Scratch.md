@@ -34,9 +34,7 @@ If the script runs successfully, the final line of the terminal output should lo
 ```
 When the script finishes you will find 2 shards for the training and validation files in the DATA_DIR. The files will match the patterns train-?????-of-00002 and validation-?????-of-00002, respectively.
 
-**note: **
-
-If you wish to prepare a custom image data set for transfer learning, you will need to invoke build_image_data.py on your custom data set. Please see the associated options and assumptions behind this script by reading the comments section of build_image_data.py. Also, if your custom data has a different number of examples or classes, you need to change the appropriate values in imagenet_data.py.
+**note** : If you wish to prepare a custom image data set for transfer learning, you will need to invoke build_image_data.py on your custom data set. Please see the associated options and assumptions behind this script by reading the comments section of build_image_data.py. Also, if your custom data has a different number of examples or classes, you need to change the appropriate values in imagenet_data.py.
 
 ### step2: Downloading Inception v3 image model
 ```
@@ -54,5 +52,44 @@ README.txt
 checkpoint
 model.ckpt-157585
 ```
+### step3: 
 
+We are now ready to fine-tune a pre-trained Inception-v3 model on the flowers data set. This requires two distinct changes to our training procedure:
+
+Build the exact same model as previously except we change the number of labels in the final classification layer.
+
+Restore all weights from the pre-trained Inception-v3 except for the final classification layer; this will get randomly initialized instead.
+
+We can perform these two operations by specifying two flags: --pretrained_model_checkpoint_path and --fine_tune. The first flag is a string that points to the path of a pre-trained Inception-v3 model. If this flag is specified, it will load the entire model from the checkpoint before the script begins training.
+
+The second flag --fine_tune is a boolean that indicates whether the last classification layer should be randomly initialized or restored. You may set this flag to false if you wish to continue training a pre-trained model from a checkpoint. If you set this flag to true, you can train a new classification layer from scratch.
+
+In order to understand how --fine_tune works, please see the discussion on Variables in the TensorFlow-Slim README.md.
+
+Putting this all together you can retrain a pre-trained Inception-v3 model on the flowers data set with the following command.
+```
+# Build the model. Note that we need to make sure the TensorFlow is ready to
+# use before this as this command will not build TensorFlow.
+cd tensorflow-models/inception
+bazel build //inception:flowers_train
+
+# Path to the downloaded Inception-v3 model.
+MODEL_PATH="${INCEPTION_MODEL_DIR}/inception-v3/model.ckpt-157585"
+
+# Directory where the flowers data resides.
+FLOWERS_DATA_DIR=/tmp/flowers-data/
+
+# Directory where to save the checkpoint and events files.
+TRAIN_DIR=/tmp/flowers_train/
+
+# Run the fine-tuning on the flowers data set starting from the pre-trained
+# Imagenet-v3 model.
+bazel-bin/inception/flowers_train \
+  --train_dir="${TRAIN_DIR}" \
+  --data_dir="${FLOWERS_DATA_DIR}" \
+  --pretrained_model_checkpoint_path="${MODEL_PATH}" \
+  --fine_tune=True \
+  --initial_learning_rate=0.001 \
+  --input_queue_memory_factor=1
+  ```
 
