@@ -1,4 +1,4 @@
-# How to fine tune a image classifier
+# How to fine tune a image classifier on Tensorflow Flowers Data
 
 **WARNING:** Training an Inception v3 network from scratch is a computationally intensive task and depending on your compute setup may take several days or even weeks.
 
@@ -11,7 +11,7 @@ Generally speaking, a batch size is a difficult parameter to tune as it requires
 **so note that : depending your hardware set up, you need to adapt the batch size and learning rate schedule.**
 
 [Tensorflow provideed example on Flowers classification](https://github.com/tensorflow/models/tree/master/research/inception) 
-above provided Linux relization, below is Windows 10 :
+above provided Linux relization, below is linux and Windows 10 :
 
 ## Linux environment :
 
