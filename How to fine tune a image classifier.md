@@ -55,7 +55,7 @@ README.txt
 checkpoint
 model.ckpt-157585
 ```
-### step3: 
+### step3: Training 
 
 We are now ready to fine-tune a pre-trained Inception-v3 model on the flowers data set. This requires two distinct changes to our training procedure:
 
@@ -63,13 +63,18 @@ Build the exact same model as previously except we change the number of labels i
 
 Restore all weights from the pre-trained Inception-v3 except for the final classification layer; this will get randomly initialized instead.
 
-We can perform these two operations by specifying two flags: --pretrained_model_checkpoint_path and --fine_tune. The first flag is a string that points to the path of a pre-trained Inception-v3 model. If this flag is specified, it will load the entire model from the checkpoint before the script begins training.
+We can perform these two operations by specifying two flags: 
+
+--pretrained_model_checkpoint_path and --fine_tune. 
+
+The first flag is a string that points to the path of a pre-trained Inception-v3 model. If this flag is specified, it will load the entire model from the checkpoint before the script begins training.
 
 The second flag --fine_tune is a boolean that indicates whether the last classification layer should be randomly initialized or restored. You may set this flag to false if you wish to continue training a pre-trained model from a checkpoint. If you set this flag to true, you can train a new classification layer from scratch.
 
 In order to understand how --fine_tune works, please see the discussion on Variables in the TensorFlow-Slim README.md.
 
 Putting this all together you can retrain a pre-trained Inception-v3 model on the flowers data set with the following command.
+
 ```
 # Build the model. Note that we need to make sure the TensorFlow is ready to
 # use before this as this command will not build TensorFlow.
@@ -96,3 +101,39 @@ bazel-bin/inception/flowers_train \
   --input_queue_memory_factor=1
   ```
 
+### step4: Evaluation 
+
+The training script will only reports the loss. To evaluate the quality of the fine-tuned model, you will need to run flowers_eval:
+
+```
+# Build the model. Note that we need to make sure the TensorFlow is ready to
+# use before this as this command will not build TensorFlow.
+cd tensorflow-models/inception
+bazel build //inception:flowers_eval
+
+# Directory where we saved the fine-tuned checkpoint and events files.
+TRAIN_DIR=/tmp/flowers_train/
+
+# Directory where the flowers data resides.
+FLOWERS_DATA_DIR=/tmp/flowers-data/
+
+# Directory where to save the evaluation events files.
+EVAL_DIR=/tmp/flowers_eval/
+
+# Evaluate the fine-tuned model on a hold-out of the flower data set.
+bazel-bin/inception/flowers_eval \
+  --eval_dir="${EVAL_DIR}" \
+  --data_dir="${FLOWERS_DATA_DIR}" \
+  --subset=validation \
+  --num_examples=500 \
+  --checkpoint_dir="${TRAIN_DIR}" \
+  --input_queue_memory_factor=1 \
+  --run_once
+  
+```
+We find that the evaluation arrives at roughly 93.4% precision@1 after the model has been running for 2000 steps.
+
+Successfully loaded model from /tmp/flowers/model.ckpt-1999 at step=1999.
+2016-03-01 16:52:51.761219: starting evaluation on (validation).
+2016-03-01 16:53:05.450419: [20 batches out of 20] (36.5 examples/sec; 0.684sec/batch)
+2016-03-01 16:53:05.450471: precision @ 1 = 0.9340 recall @ 5 = 0.9960 [500 examples]
