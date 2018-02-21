@@ -12,6 +12,7 @@ Train a gender classifer using tensorflow and our own data
 ## step3: training
   * [simple fine-tune actively training, short time and can get a realtively acceptable result]()
   * [Training from scratch, higher accuracy and long time than fine-tune actively learning]()
+  * [How to fine tune a image classifier on Tensorflow Flowers Data]()
 
 ## step4: test on your seperate data and test on other data, as possible as more generalized
 
