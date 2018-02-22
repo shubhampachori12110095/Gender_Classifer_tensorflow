@@ -230,7 +230,7 @@ Open a project with AndroidStudio by taking the following steps:
 2. In the file selector, choose tensorflow-for-poets-2/android/tfmobile from your working directory.
 3. You will get a "Gradle Sync" popup, the first time you open the project, asking about using gradle wrapper. Click "OK".
 <center>
-    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b9f9a03dd27fd1bb.png">
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b9f9a03dd27fd1bb.png" height="300px">
 </center>
 
 
