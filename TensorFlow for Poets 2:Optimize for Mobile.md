@@ -233,4 +233,54 @@ Open a project with AndroidStudio by taking the following steps:
     <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b9f9a03dd27fd1bb.png" height="300px">
 </center>
 
+### step 6: Test run the app
 
+The app can run on either the a real Android device, or in the AndroidStudio Emulator.
+
+**Set up an Android device**
+
+You can't load the app from android studio onto your phone unless you activate "developer mode" and "USB Debugging". This is a one time setup process.
+
+Follow these [instructions](https://developer.android.com/studio/debug/dev-options.html#enable).
+
+**Or set up the emulator with camera access**
+
+Android studio makes setting up an emulator easy. Since this app uses the camera, you may want want to setup the emulator's camera to use your computer's camera instead of the default test pattern. 
+
+To do this you need to create a new device in the "Android Virtual Device Manager", which you can access with this button. From the main ADVM page select "Create VIrtual Device":
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/4a7a52c6d04a350b.png" height="300px">
+</center>
+
+Then on the "Verify Configuration" page, the last page of the virtual device setup, select "Show Advanced Settings":
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/fc6fc5d70c77f5f2.png" height="300px">
+</center>
+
+With the advanced settings shown, you can set the camera source to use the host computer webcam:
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/14b9c0f2666819bc.png" height="300px">
+</center>
+
+**Test Build and install the app**
+Before making any changes to the app let's run the version that ships with the repository.
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/774326d4e89c2559.png">
+</center>
+
+Run a Gradle sync, and then hit play, in Android Studio to start the build and install process.
+
+Next you will need to select your phone from this popup:
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b315baa6b4a3e80f.png" height="300px">
+</center>
+
+Now allow the Tensorflow Demo to access your camera and files:
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7b8fced048328e6c.png" height="300px">
+</center>
+
+Now that the app is installed, click the app icon, to launch it. This version of the app uses the standard MobileNet, pre-trained on the 1000 ImageNet categories. It should look something like this ("Android" is not one of the available categories)::
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/9b607aec2f4567c8.png" height="300px">
+</center>
