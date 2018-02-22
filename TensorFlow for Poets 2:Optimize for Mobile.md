@@ -155,3 +155,60 @@ Below I've used [ImageMagick's](https://www.imagemagick.org/script/index.php) co
 <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/68b7f947c4e09b3e.png" height="300px" alt="24 bit color: 290KB" title="24 bit color: 290KB"> <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7551be7b2cd5e1bb.png" height="300px" alt="32 colors: 55KB" title="32 colors: 55KB" >
 </div>
 
+**Quantize the network weights**
+
+Applying an almost identical process to your neural network weights has a similar effect. It gives a lot more repetition for the compression algorithm to take advantage of, while reducing the precision by a small amount (typically less than a 1% drop in precision).
+
+It does this without any changes to the structure of the network, it simply quantizes the constants in place.
+
+Now use the quantize_graph script to apply these changes:
+
+(This script is from the TensorFlow repository, but it is not included in the default installation)
+
+```
+python -m scripts.quantize_graph \
+  --input=tf_files/optimized_graph.pb \
+  --output=tf_files/rounded_graph.pb \
+  --output_node_names=final_result \
+  --mode=weights_rounded
+```
+Now try compressing this quantized model:
+
+```
+gzip -c tf_files/rounded_graph.pb > tf_files/rounded_graph.pb.gz
+gzip -l tf_files/rounded_graph.pb.gz
+```
+```
+         compressed        uncompressed   ratio    uncompressed_name
+            1633131             5460032   70.1%    tf_files/rounded_graph.pb
+```
+You should see a significant improvement. I get 70% compression instead of the 8% that gzip provided for the original model.
+
+Now before you continue, verify that the quantization process hasn't had too negative an effect on the model's performance.
+
+First manually compare the two models on an example image.
+```
+python -m scripts.label_image \
+  --image=tf_files/flower_photos/daisy/3475870145_685a19116d.jpg \
+  --graph=tf_files/optimized_graph.pb
+python -m scripts.label_image \
+  --image=tf_files/flower_photos/daisy/3475870145_685a19116d.jpg \
+  --graph=tf_files/rounded_graph.pb
+```
+For me, on this input image, the output probabilities have each changed by less than one tenth of a percent (absolute).
+
+Next verify the change on a larger slice if the data to see how it affects overall performance.
+
+First evaluate the performance of the baseline model on the validation set. The last two lines of the output show the average performance. It may take a minute or two to get the results back.
+```
+python -m scripts.evaluate  tf_files/optimized_graph.pb
+```
+For me, optimized_graph.pb scores scores 90.9% accuracy, and 0.270 for cross entropy error (lower is better).
+
+Now compare that with the performance of the model in rounded_graph.pb:
+```
+python -m scripts.evaluate  tf_files/rounded_graph.pb
+```
+You should see less than a 1% change in the model accuracy.
+
+These differences are far from statistically significant. The goal is simply to confirm that the model was clearly not broken by this change.
