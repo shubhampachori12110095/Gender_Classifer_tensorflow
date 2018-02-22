@@ -26,5 +26,5 @@ This directory should contain three other subdirectories:
 > * The scripts/ directory contains the python scripts you'll be using throughout the tutorial. These include scripts to prepare, test and evaluate the model.
 > * The tf_files/ directory contains the files you should have generated in the first part. At minimum you should have the following files containing the retrained tensorflow program:
 > ```
-retrained_graph.pb  retrained_labels.txt
-```
+> retrained_graph.pb  retrained_labels.txt
+> ```
