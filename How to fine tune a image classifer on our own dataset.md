@@ -42,7 +42,7 @@ where we have selected 1024 and 128 shards for each data set. Each record within
   
 If your data set involves bounding boxes, please look at [build_imagenet_data.py]() .
 
-######code:
+###### code:
 ```
 from __future__ import absolute_import
 from __future__ import division
