@@ -121,3 +121,23 @@ Now open TensorBoard, and navigate to the "Graph" tab. Then from the pick-list l
 Explore the graph a little, then select "Optimized" from the "Run" menu.
 
 From here you can confirm some nodes have been merged to simplify the graph. You can expand the various blocks by double-clicking them.
+
+### step 4: Make the model compressible
+
+**Check the compression baseline**
+
+The retrained model is still 84MB in size at this point. That large download size may be a limiting factor for any app that includes it.
+
+Every mobile app distribution system compresses the package before distribution. So test how much the graph can be compressed using the gzip command:
+```
+gzip -c tf_files/optimized_graph.pb > tf_files/optimized_graph.pb.gz
+
+gzip -l tf_files/optimized_graph.pb.gz
+```
+```
+            compressed        uncompressed    ratio     uncompressed_name
+            5028302             5460013       7.9%      tf_files/optimized_graph.pb
+```
+Not much! :relieved:
+
+On its own, compression is not a huge help. For me this only shaves 8% off the model size. If you're familiar with how neural networks and compression work this should be unsurprising.
