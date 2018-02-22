@@ -3,8 +3,6 @@
 ### step1: build image data
 
 *Converts image data to TFRecords file format with Example protos*
-- [x] example
-- [ ] example
 
 The image data set is expected to reside in JPEG files located in the following directory structure.
   * data_dir/label_0/image0.jpeg
