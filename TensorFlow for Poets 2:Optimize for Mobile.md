@@ -25,6 +25,6 @@ This directory should contain three other subdirectories:
 > * The android/tfmobile/ directory contains all the files necessary to build the a simple Android app that classifies images as it reads them from the camera. The only files missing for the app are those defining the image classification model, which you will create in this tutorial.
 > * The scripts/ directory contains the python scripts you'll be using throughout the tutorial. These include scripts to prepare, test and evaluate the model.
 > * The tf_files/ directory contains the files you should have generated in the first part. At minimum you should have the following files containing the retrained tensorflow program:
-```
+> ```
 retrained_graph.pb  retrained_labels.txt
 ```
