@@ -2,7 +2,7 @@
 Train a gender classifer using tensorflow and our own data
 
 ## step1: data collection and argumentation 
-  * souce data: RAP(40K), PETA(100K), some wrong classification here, need manunally cleaned, suggested that using samll dataset to train a classification model, then using this model to help you classify data. 
+  * souce data: [RAP(40K)](https://arxiv.org/abs/1603.07054), [PETA(100K)](http://mmlab.ie.cuhk.edu.hk/projects/PETA.html), some wrong classification here, need manunally cleaned, suggested that using samll dataset to train a classification model, then using this model to help you classify data. 
   * our collected data: from office, airport, street 
 
 ## step2: pretrained model comparison and selection
