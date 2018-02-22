@@ -141,3 +141,19 @@ gzip -l tf_files/optimized_graph.pb.gz
 Not much! :relieved:
 
 On its own, compression is not a huge help. For me this only shaves 8% off the model size. If you're familiar with how neural networks and compression work this should be unsurprising.
+
+The majority of the space taken up by the graph is by the weights, which are large blocks of floating point numbers. Each weight has a slightly different floating point value, with very little regularity.
+
+But compression works by exploiting regularity in the data, which explains the failure here.
+
+**Example: Quantize an Image**
+
+Images can also be thought of as large blocks of numbers. One simple technique for compressing images it to reduce the number of colors. You will do the same thing to your network weights, after I demonstrate the effect on an image.
+
+Below I've used [ImageMagick's](https://www.imagemagick.org/script/index.php) convert utility to reduce an image to 32 colors. This reduces the image size by more than a factor of 5 (png has built in compression), but has degraded the image quality.
+<div align="center">
+![24 bit color: 290KB](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/68b7f947c4e09b3e.png) ![32 colors: 55KB](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7551be7b2cd5e1bb.png)
+<img src="图片地址" height="300px" alt="图片说明" >
+<img src="图片地址" height="300px" alt="图片说明" >
+</div>
+
