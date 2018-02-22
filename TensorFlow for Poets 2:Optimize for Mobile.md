@@ -13,7 +13,7 @@ A simple camera app that runs a TensorFlow image recognition program to identify
 
 ### step 1: some preparations
 
-If you have the git repository from the first Tensorflow for Poets:
+##### If you have the git repository from the first Tensorflow for Poets:
 
 We will be working in that same git directory, ensure that it is your current working directory, and check the contents, as follows:
 ```
@@ -28,3 +28,5 @@ This directory should contain three other subdirectories:
 > ```
 > retrained_graph.pb  retrained_labels.txt
 > ```
+
+##### If you don't have the git repository from the first Tensorflow for Poets:
