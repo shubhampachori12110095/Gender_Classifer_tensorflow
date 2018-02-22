@@ -30,3 +30,49 @@ This directory should contain three other subdirectories:
 > ```
 
 ##### If you don't have the git repository from the first Tensorflow for Poets:
+```
+git clone https://github.com/googlecodelabs/tensorflow-for-poets-2
+
+```
+### step 2: Test the model
+Next, verify that the model is producing sane results before starting to modifying it.
+
+The scripts/ directory contains a simple command line script, label_image.py, to test the network. Now we'll test label_image.py on this picture of some daisies:
+
+Now test the model. If you are using a different architecture you will need to set the "--input_size" flag.
+```
+python -m scripts.label_image \
+  --graph=tf_files/retrained_graph.pb  \
+  --image=tf_files/flower_photos/daisy/3475870145_685a19116d.jpg
+```
+The script will print the probability the model has assigned to each flower type. Something like this:
+```
+Evaluation time (1-image): 0.140s
+
+daisy 0.7361
+dandelion 0.242222
+tulips 0.0185161
+roses 0.0031544
+sunflowers 8.00981e-06
+```
+### step 3: Optimize the model
+Mobile devices have significant limitations, so any pre-processing that can be done to reduce an app's footprint is worth considering.
+
+**Limited libraries on mobile**
+One way the TensorFlow library is kept small, for mobile, is by only supporting the subset of operations that are commonly used during inference. This is a reasonable approach, as training is rarely conducted on mobile platforms. Similarly it also excludes support for operations with large external dependencies. You can see the list of supported ops in the [tensorflow/contrib/makefile/tf_op_files.txt](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/makefile/tf_op_files.txt) file. 
+
+By default, most graphs contain training ops that the mobile version of TensorFlow doesn't support. TensorFlow won't load a graph that contains an unsupported operation (even if the unsupported operation is irrelevant for inference).
+
+**Optimize for inference**
+To avoid problems caused by unsupported training ops, the TensorFlow installation includes a tool, optimize_for_inference, that removes all nodes that aren't needed for a given set of input and outputs.
+
+The script also does a few other optimizations that help speed up the model, such as merging explicit batch normalization operations into the convolutional weights to reduce the number of calculations. This can give a 30% speed up, depending on the input model. Here's how you run the script:
+```
+python -m tensorflow.python.tools.optimize_for_inference \
+  --input=tf_files/retrained_graph.pb \
+  --output=tf_files/optimized_graph.pb \
+  --input_names="input" \
+  --output_names="final_result"
+```
+Running this script creates a new file at tf_files/optimized_graph.pb.
+
