@@ -4,4 +4,4 @@
 
 *Converts image data to TFRecords file format with Example protos*
 - [x] hdjkhk
-- [] dgsjkk
+- [ ] dgsjkk
