@@ -1,4 +1,4 @@
-# 
+# simple transfer learning tensorflow training classifer (last layer bottleneck)
 run TensorFlow on a single machine, and will train a simple classifier to classify images of flowers.
 
 We will be using transfer learning, which means we are starting with a model that has been already trained on another problem. We will then be retraining it on a similar problem. Deep learning from scratch can take days, but transfer learning can be done in short order.
