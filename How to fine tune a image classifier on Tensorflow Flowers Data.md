@@ -141,3 +141,8 @@ Successfully loaded model from /tmp/flowers/model.ckpt-1999 at step=1999.
 
 2016-03-01 16:53:05.450471: precision @ 1 = 0.9340 recall @ 5 = 0.9960 [500 examples]
 
+Note: 
+
+different training steps have different training result. 
+
+Training step is 50K, the precision can achieve 0.7031, recall can reach 0.9980. 
