@@ -3,5 +3,5 @@
 ### step1: build image data
 
 *Converts image data to TFRecords file format with Example protos*
--[x]hdjkhk
--[]dgsjkk
+- [x] hdjkhk
+- [] dgsjkk
