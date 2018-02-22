@@ -11,7 +11,8 @@ We are going to use a model trained on the ImageNet Large Visual Recognition Cha
 
 ### step1: Preparations
 
-* Install TensorFlow
+* 1. Install TensorFlow
+ 
  Before we can begin the tutorial you need to install tensorflow.
 
 > If you already have TensorFlow installed, be sure it is a recent version. This codelab requires at least version 1.2. You can upgrade to the most recent stable branch with
