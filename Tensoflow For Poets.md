@@ -11,7 +11,7 @@ We are going to use a model trained on the ImageNet Large Visual Recognition Cha
 
 ### step1: Preparations
 
-* 1. Install TensorFlow
+* 1.Install TensorFlow
  
  Before we can begin the tutorial you need to install tensorflow.
 
