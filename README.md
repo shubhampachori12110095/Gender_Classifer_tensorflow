@@ -9,9 +9,8 @@ Train a gender classifer using tensorflow and our own data
   * [tensoflow provided classication Pre-trained Models](https://github.com/tensorflow/models/tree/master/research/slim#pre-trained-models)
   * according to your application, make tradeoff between accuracy and speed
 
-## step3: training
-  * [simple fine-tune actively training, short time and can get a realtively acceptable result]()
-  * [Training from scratch, higher accuracy and long time than fine-tune actively learning]()
+## step3: training methods 
+  * [simple fine-tune actively training on Kears]()
   * [How to fine tune a image classifier on Tensorflow Flowers Data](https://github.com/walton-wang929/Gender_Classifer_tensorflow/blob/master/fine%20tune%20Flowers%20Dataset.md)
   * [How to fine tune a image classifer on our own dataset](https://github.com/walton-wang929/Gender_Classifer_tensorflow/blob/master/fine%20tune%20own%20dataset.md)
   * [simple transfer learning tensorflow training classifer (last layer bottleneck)](https://github.com/walton-wang929/Gender_Classifer_tensorflow/blob/master/Tensoflow%20For%20Poets.md)
