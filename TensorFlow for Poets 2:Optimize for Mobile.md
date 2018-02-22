@@ -152,6 +152,6 @@ Images can also be thought of as large blocks of numbers. One simple technique f
 
 Below I've used [ImageMagick's](https://www.imagemagick.org/script/index.php) convert utility to reduce an image to 32 colors. This reduces the image size by more than a factor of 5 (png has built in compression), but has degraded the image quality.
 <div align="center">
-<img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/68b7f947c4e09b3e.png" height="300px" alt="24 bit color: 290KB" > <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7551be7b2cd5e1bb.png" height="300px" alt="32 colors: 55KB" >
+<img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/68b7f947c4e09b3e.png" height="300px" alt="24 bit color: 290KB" > <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7551be7b2cd5e1bb.png" height="300px" alt="32 colors: 55KB" title="Logo" >
 </div>
 
