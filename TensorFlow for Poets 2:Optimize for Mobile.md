@@ -272,15 +272,59 @@ Run a Gradle sync, and then hit play, in Android Studio to start the build and i
 
 Next you will need to select your phone from this popup:
 <center>
-    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b315baa6b4a3e80f.png" height="300px">
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b315baa6b4a3e80f.png" height="200px">
 </center>
 
 Now allow the Tensorflow Demo to access your camera and files:
 <center>
-    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7b8fced048328e6c.png" height="300px">
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/7b8fced048328e6c.png" height="200px">
 </center>
 
 Now that the app is installed, click the app icon, to launch it. This version of the app uses the standard MobileNet, pre-trained on the 1000 ImageNet categories. It should look something like this ("Android" is not one of the available categories)::
 <center>
     <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/9b607aec2f4567c8.png" height="300px">
 </center>
+
+### step 7: Run the customized app
+
+The default app setup classifies images into one of the 1000 ImageNet classes, using the standard MobileNet, without the retraining we did in part 1.
+
+Now let's modify the app so that the app will use our retrained morel for our custom image categories.
+
+**Add your model files to the project**
+
+The demo project is configured to search for a graph.pb, and a labels.txt files in the android/tfmobile/assets directory. Replace those two files with your versions. The following command accomplishes this task:
+```
+cp tf_files/rounded_graph.pb android/tfmobile/assets/graph.pb
+cp tf_files/retrained_labels.txt android/tfmobile/assets/labels.txt 
+```
+**Change the output_name in ClassifierActivity.java**
+
+The TensorFlow Interface used by the app requires that you ask for your results by name. The app is currently set up to read the output of the baseline MobileNet, named "MobilenetV1/Predictions/Softmax". The output node for our model has a different name: "final_result". Open ClassifierActivity.java and update the OUTPUT_NAME variable as follows:
+```
+  private static final String INPUT_NAME = "input";
+  private static final String OUTPUT_NAME = "final_result";
+```
+**Run your app**
+
+In Android Studio run a Gradle sync, , so the build system can find your files, and then hit play, , in to start the build and install process as before.
+
+It should look something like this:
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/49ef495e892ee86f.png" height="600px">
+</center>
+
+You can hold the power and volume-down buttons together to take a screenshot.
+
+Now try a web search for flowers, point the camera at the computer screen, and see if those pictures are correctly classified.
+
+> If you get a Gradle sync error:
+> <center>
+>    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/186d73f2db74031.png" height="300px">
+> </center>
+>It's because gradle couldn't find android/tfmobile/assets/graph.pb, or android/tfmobile/assets/labels.txt. Verify the locations of those files and rerun the gradle sync by clicking the "Sync Project with Gradle Files" button from the toolbar:
+> <center>
+>    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/774326d4e89c2559.png">
+> </center>
+
+
