@@ -96,4 +96,12 @@ Before starting the training, launch tensorboard in the background. TensorBoard 
 tensorboard --logdir tf_files/training_summaries &
 ```
 
+### More about Bottlenecks
+
+*This section and the next provide background on how this retraining process works.*
+
+The first phase analyzes all the images on disk and calculates the bottleneck values for each of them. What's a bottleneck?
+
+These ImageNet models are made up of many layers stacked on top of each other, a simplified picture of Inception V3 from TensorBoard, is shown above (all the details are available in this [paper](http://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf), with a complete picture on page 6). These layers are pre-trained and are already very valuable at finding and summarizing information that will help classify most images. For this codelab, you are training only the last layer (final_training_ops in the figure below). While all the previous layers retain their already-trained state.
+![](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/img/84a6154ed64fd0fb.png)
 
