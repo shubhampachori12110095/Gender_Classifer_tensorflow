@@ -212,3 +212,25 @@ python -m scripts.evaluate  tf_files/rounded_graph.pb
 You should see less than a 1% change in the model accuracy.
 
 These differences are far from statistically significant. The goal is simply to confirm that the model was clearly not broken by this change.
+
+### step 5: Setup the Android app
+
+**Install AndroidStudio**
+
+If you don't have it installed already, go install [AndroidStudio 3.0+](https://developer.android.com/studio/index.html).
+
+**Open the project with AndroidStudio**
+Open a project with AndroidStudio by taking the following steps:
+
+1. Open AndroidStudio. After it loads select "Open an existing Android Studio project" from this popup:
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/1482ddc7911df61b.png">
+</center>
+
+2. In the file selector, choose tensorflow-for-poets-2/android/tfmobile from your working directory.
+3. You will get a "Gradle Sync" popup, the first time you open the project, asking about using gradle wrapper. Click "OK".
+<center>
+    <img src="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2/img/b9f9a03dd27fd1bb.png">
+</center>
+
+
